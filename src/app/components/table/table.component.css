@@ -1,0 +1,62 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  letter-spacing: 0.3px;
+}
+
+th {
+  background: #b0235f;
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 15px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #2c3e50;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background: rgba(0, 18, 32, 0.05);
+}
+
+button {
+  margin: 20px 0;
+  padding: 10px 20px;
+  background: #fa7268;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: background 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+  background: #d73b67;
+}
+
+button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
