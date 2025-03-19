@@ -16,7 +16,9 @@ export class CountriesService {
     return this.http
       .get<any>(this.countriesUrl)
       .pipe(
-        map((response) => response.data.map((country: any) => country.name))
+        map((response) =>
+          response.data.map((country: any) => country.name).sort()
+        )
       );
   }
 
