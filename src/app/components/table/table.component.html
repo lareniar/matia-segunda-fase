@@ -1,1 +1,19 @@
-<p>table works!</p>
+<tr>
+  @for (header of tableHeaders; track $index) {
+  <th>{{ header }}</th>
+  }
+</tr>
+
+@for (record of records; track $index) {
+<tr>
+  <td>{{ record.name }}</td>
+  <td>{{ record.surname }}</td>
+  <td>{{ record.phone }}</td>
+  <td>{{ record.country }}</td>
+  <td>{{ record.email }}</td>
+  <td>{{ record.state }}</td>
+</tr>
+}
+<button [disabled]="records.length === 0" (click)="deleteRecord()">
+  Delete
+</button>

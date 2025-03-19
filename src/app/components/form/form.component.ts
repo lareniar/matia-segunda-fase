@@ -8,12 +8,13 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { Record } from '../../interfaces/record';
 
 @Component({
   selector: 'app-form-component',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './form-component.html',
+  templateUrl: './form.component.html',
   styleUrl: './form.component.css',
 })
 export class FormComponent implements ControlValueAccessor {
@@ -25,7 +26,8 @@ export class FormComponent implements ControlValueAccessor {
   @Input() isLoadingStates = false;
 
   @Output() selectedCountry = new EventEmitter<string>();
-
+  @Output() addRecord = new EventEmitter<Record>();
+  previousCountry: string | null = null;
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     surname: new FormControl('', [Validators.required]),
@@ -38,15 +40,17 @@ export class FormComponent implements ControlValueAccessor {
   onSelectedCountry(event: Event) {
     const selectedCountry: string | null | undefined =
       this.form.get('country')?.value;
-    if (selectedCountry != null) {
+    if (selectedCountry != null && selectedCountry != this.previousCountry) {
       this.selectedCountry.emit(selectedCountry);
+      this.previousCountry = selectedCountry;
     }
   }
 
   onSubmit() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      console.log(this.form.value);
+      const record: Record = this.form.value as Record;
+      this.addRecord.emit(record);
     }
   }
 

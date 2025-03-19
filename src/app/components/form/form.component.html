@@ -71,12 +71,11 @@
 
   <div class="form-field">
     <label for="state">State</label>
-    <select [disabled]="isLoadingStates" id="state" formControlName="state">
+    <select id="state" formControlName="state">
       <option value="">Select a state</option>
-      @if (isLoadingStates) {
-      <option disabled>Loading states...</option>
-      } @if (!(states | async) || (states | async)?.length === 0) {
-      <option disabled>No states found</option>
+      @if (isLoadingStates || !(states | async) || (states | async)?.length ===
+      0) {
+      <option [disabled]="true">Loading states...</option>
       } @for (state of states | async; track $index) {
       <option [value]="state">{{ state }}</option>
       }

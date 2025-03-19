@@ -5,4 +5,7 @@
   [states]="states"
   [isLoadingStates]="isLoadingStates"
   (selectedCountry)="onSelectedCountry($event)"
+  (addRecord)="onAddRecord($event)"
 />
+
+<app-table [records]="records" [tableHeaders]="tableHeaders" />
