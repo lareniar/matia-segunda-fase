@@ -60,7 +60,7 @@
       (blur)="onSelectedCountry($event)"
     >
       <option value="">Select a country</option>
-      @for (country of countries; track country) {
+      @for (country of countries | async; track country) {
       <option [value]="country">{{country}}</option>
       }
     </select>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -6,11 +7,12 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-form-component',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './form-component.html',
   styleUrl: './form-component.css',
 })
@@ -18,7 +20,7 @@ export class FormComponent implements ControlValueAccessor {
   onChange: any = () => {};
   onTouched: any = () => {};
 
-  countries = ['Argentina', 'Brasil', 'Chile', 'Uruguay'];
+  @Input() countries: Observable<string[]> = new Observable<string[]>();
   provinces: { [key: string]: string[] } = {
     Argentina: ['Buenos Aires', 'Córdoba', 'Mendoza', 'Tierra del Fuego'],
     Brasil: ['São Paulo', 'Rio de Janeiro', 'Minas Gerais', 'Paraná'],
