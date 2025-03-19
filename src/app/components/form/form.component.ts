@@ -9,18 +9,22 @@ import {
 } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Record } from '../../interfaces/record';
-
+import { InputComponent } from '../input/input.component';
+import { SelectComponent } from '../select/select.component';
 @Component({
   selector: 'app-form-component',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, InputComponent, SelectComponent],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
 })
 export class FormComponent implements ControlValueAccessor {
   onChange: any = () => {};
   onTouched: any = () => {};
-
+  phoneErrorMessage: string = '';
+  nameErrorMessage: string = '';
+  surnameErrorMessage: string = '';
+  emailErrorMessage: string = '';
   @Input() countries: Observable<string[]> = new Observable<string[]>();
   @Input() states: Observable<string[]> = new Observable<string[]>();
   @Input() isLoadingStates = false;

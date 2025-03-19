@@ -1,1 +1,11 @@
-<p>input works!</p>
+<div class="input-container">
+  <label [for]="label">{{ label }}</label>
+  <input
+    [id]="label"
+    [value]="value"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    (input)="onInput($event)"
+    (blur)="onTouched()"
+  />
+</div>

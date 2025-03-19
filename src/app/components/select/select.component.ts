@@ -5,24 +5,28 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-input',
+  selector: 'app-select',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
+      useExisting: forwardRef(() => SelectComponent),
       multi: true,
     },
   ],
-  templateUrl: './input.component.html',
-  styleUrl: './input.component.css',
+  templateUrl: './select.component.html',
+  styleUrl: './select.component.css',
 })
-export class InputComponent implements ControlValueAccessor {
+export class SelectComponent implements ControlValueAccessor {
   @Input() label: string = '';
   @Input() placeholder: string = '';
+  @Input() errorMessage: string = '';
+  @Input() options: Observable<string[]> = new Observable<string[]>();
+  @Input() isLoading: boolean = false;
 
   value: string = '';
   disabled: boolean = false;
@@ -45,8 +49,8 @@ export class InputComponent implements ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
-  onInput(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
+  onSelect(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
     this.value = value;
     this.onChange(value);
   }

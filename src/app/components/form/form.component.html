@@ -1,10 +1,8 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="form-field">
-    <label for="name">Name</label>
-    <input
-      type="text"
-      id="name"
+    <app-input
       formControlName="name"
+      label="Name"
       placeholder="Enter your name"
     />
     @if (form.get('name')?.touched && form.get('name')?.errors) {
@@ -13,11 +11,9 @@
   </div>
 
   <div class="form-field">
-    <label for="surname">Surname</label>
-    <input
-      type="text"
-      id="surname"
+    <app-input
       formControlName="surname"
+      label="Surname"
       placeholder="Enter your surname"
     />
     @if (form.get('surname')?.touched && form.get('surname')?.errors) {
@@ -26,11 +22,9 @@
   </div>
 
   <div class="form-field">
-    <label for="phone">Phone</label>
-    <input
-      type="tel"
-      id="phone"
+    <app-input
       formControlName="phone"
+      label="Phone"
       placeholder="Enter your phone number"
     />
     @if (form.get('phone')?.touched && form.get('phone')?.errors) {
@@ -39,11 +33,9 @@
   </div>
 
   <div class="form-field">
-    <label for="email">Email</label>
-    <input
-      type="email"
-      id="email"
+    <app-input
       formControlName="email"
+      label="Email"
       placeholder="Enter your email"
     />
     @if (form.get('email')?.touched && form.get('email')?.errors) {
@@ -52,34 +44,25 @@
   </div>
 
   <div class="form-field">
-    <label for="country">Country</label>
-    <select
-      id="country"
+    <app-select
       formControlName="country"
+      label="Country"
+      placeholder="Select a country"
+      [options]="countries"
       (change)="onSelectedCountry($event)"
-      (blur)="onSelectedCountry($event)"
-    >
-      <option value="">Select a country</option>
-      @for (country of countries | async; track country) {
-      <option [value]="country">{{ country }}</option>
-      }
-    </select>
+    />
     @if (form.get('country')?.touched && form.get('country')?.errors) {
     <div class="error-message">{{ getErrorMessage("country") }}</div>
     }
   </div>
 
   <div class="form-field">
-    <label for="state">State</label>
-    <select id="state" formControlName="state">
-      <option value="">Select a state</option>
-      @if (isLoadingStates || !(states | async) || (states | async)?.length ===
-      0) {
-      <option [disabled]="true">Loading states...</option>
-      } @for (state of states | async; track $index) {
-      <option [value]="state">{{ state }}</option>
-      }
-    </select>
+    <app-select
+      formControlName="state"
+      label="State"
+      placeholder="Select a state"
+      [options]="states"
+    />
     @if (form.get('state')?.touched && form.get('state')?.errors) {
     <div class="error-message">{{ getErrorMessage("state") }}</div>
     }
