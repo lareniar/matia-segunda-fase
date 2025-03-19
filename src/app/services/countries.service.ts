@@ -22,7 +22,7 @@ export class CountriesService {
       );
   }
 
-  getStates(country: string): Observable<string[]> {
+  getStatesByCountryName(country: string): Observable<string[]> {
     return this.http
       .post<any>(this.statesUrl, { country })
       .pipe(

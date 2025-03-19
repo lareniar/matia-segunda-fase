@@ -27,7 +27,7 @@ export class AppComponent {
 
   onSelectedCountry(country: string) {
     this.isLoadingStates = true;
-    this.states = this.countriesService.getStatesByCountry(country);
+    this.states = this.countriesService.getStatesByCountryName(country);
     this.isLoadingStates = false;
   }
 }
