@@ -70,16 +70,16 @@
   </div>
 
   <div class="form-field">
-    <label for="state">States</label>
-    <select id="state" formControlName="state">
+    <label for="state">State</label>
+    <select [disabled]="isLoadingStates" id="state" formControlName="state">
       <option value="">Select a state</option>
       @if (isLoadingStates) {
-      <option disabled>Loading States...</option>
-      } @else { @if ((states | async)?.length == 0) {
-      <option disabled>States not found</option>
-      } @else { @for (state of states | async; track $index) { aaaa
+      <option disabled>Loading states...</option>
+      } @if (!(states | async) || (states | async)?.length === 0) {
+      <option disabled>No states found</option>
+      } @for (state of states | async; track $index) {
       <option [value]="state">{{ state }}</option>
-      } } }
+      }
     </select>
     @if (form.get('state')?.touched && form.get('state')?.errors) {
     <div class="error-message">{{ getErrorMessage("state") }}</div>
