@@ -7,7 +7,3 @@ export interface Record {
   state: string;
   [key: string]: string;
 }
-
-export interface RecordValues {
-  records: Record[];
-}
