@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -21,13 +21,10 @@ export class FormComponent implements ControlValueAccessor {
   onTouched: any = () => {};
 
   @Input() countries: Observable<string[]> = new Observable<string[]>();
-  provinces: { [key: string]: string[] } = {
-    Argentina: ['Buenos Aires', 'Córdoba', 'Mendoza', 'Tierra del Fuego'],
-    Brasil: ['São Paulo', 'Rio de Janeiro', 'Minas Gerais', 'Paraná'],
-    Chile: ['Santiago', 'Valparaíso', 'Antofagasta', 'Atacama'],
-    Uruguay: ['Montevideo', 'Artigas', 'Canelones', 'Maldonado'],
-  };
-  filteredProvinces: string[] = [];
+  @Input() states: Observable<string[]> = new Observable<string[]>();
+  @Input() isLoadingStates = false;
+
+  @Output() selectedCountry = new EventEmitter<string>();
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -35,18 +32,15 @@ export class FormComponent implements ControlValueAccessor {
     phone: new FormControl('', [Validators.pattern('^[0-9]{9}$')]),
     email: new FormControl('', [Validators.required, Validators.email]),
     country: new FormControl('', [Validators.required]),
-    province: new FormControl('', [Validators.required]),
+    state: new FormControl('', [Validators.required]),
   });
 
   onSelectedCountry(event: Event) {
     const selectedCountry: string | null | undefined =
       this.form.get('country')?.value;
-    if (selectedCountry != null) this.onFilteredProvinces(selectedCountry);
-  }
-
-  // should be an observable from the values of the service when we select a country
-  onFilteredProvinces(selectedCountry: string) {
-    this.filteredProvinces = this.provinces[selectedCountry];
+    if (selectedCountry != null) {
+      this.selectedCountry.emit(selectedCountry);
+    }
   }
 
   onSubmit() {

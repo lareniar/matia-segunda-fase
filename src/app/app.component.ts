@@ -18,8 +18,16 @@ export class AppComponent {
   title = 'matia-segunda-fase';
 
   countries = new Observable<string[]>();
+  states = new Observable<string[]>();
+  isLoadingStates = false;
 
   constructor(private countriesService: CountriesService) {
     this.countries = this.countriesService.getCountries();
+  }
+
+  onSelectedCountry(country: string) {
+    this.isLoadingStates = true;
+    this.states = this.countriesService.getStates(country);
+    this.isLoadingStates = false;
   }
 }

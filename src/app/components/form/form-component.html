@@ -70,15 +70,19 @@
   </div>
 
   <div class="form-field">
-    <label for="province">Province</label>
-    <select id="province" formControlName="province">
-      <option value="">Select a province</option>
-      @for (province of filteredProvinces; track $index) {
-      <option [value]="province">{{province}}</option>
-      }
+    <label for="state">States</label>
+    <select id="state" formControlName="state">
+      <option value="">Select a state</option>
+      @if (isLoadingStates) {
+      <option disabled>Loading States...</option>
+      } @else { @if (!(states | async)) {
+      <option disabled>States not found</option>
+      } @else { @for (state of states | async; track $index) {
+      <option [value]="state">{{state}}</option>
+      } } }
     </select>
-    @if (form.get('province')?.touched && form.get('province')?.errors) {
-    <div class="error-message">{{ getErrorMessage('province') }}</div>
+    @if (form.get('state')?.touched && form.get('state')?.errors) {
+    <div class="error-message">{{ getErrorMessage('state') }}</div>
     }
   </div>
 
