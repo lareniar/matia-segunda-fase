@@ -5,7 +5,7 @@ import { Observable, map } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class CountryService {
+export class CountriesService {
   private countriesUrl =
     'https://countriesnow.space/api/v0.1/countries/flag/unicode';
   private statesUrl = 'https://countriesnow.space/api/v0.1/countries/states';
