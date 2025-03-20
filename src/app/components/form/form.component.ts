@@ -33,8 +33,8 @@ export class FormComponent implements ControlValueAccessor {
   @Output() selectedCountry = new EventEmitter<string>();
   @Output() addRecord = new EventEmitter<Record>();
   previousCountry: string | null = null;
-  emailRegex = '/^[w-.]+@([w-]+.)+[w-]{2,4}$/';
-  phoneRegex = '/^[0-9]{9}$/';
+  emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  phoneRegex = /^[0-9]{9}$/;
 
   // The form group validators should use a factory to generate each form control
   form = new FormGroup({
@@ -55,9 +55,11 @@ export class FormComponent implements ControlValueAccessor {
   onSelectedCountry(event: Event) {
     const selectedCountry: string | null | undefined =
       this.form.get('country')?.value;
-    if (selectedCountry != null && selectedCountry != this.previousCountry) {
+    if (selectedCountry != null && selectedCountry !== this.previousCountry) {
       this.selectedCountry.emit(selectedCountry);
       this.previousCountry = selectedCountry;
+      // Reset state when country changes
+      this.form.get('state')?.setValue('');
     }
   }
 
@@ -79,9 +81,11 @@ export class FormComponent implements ControlValueAccessor {
 
   onSubmit() {
     this.form.markAllAsTouched();
+
     if (this.form.valid) {
       const record: Record = this.form.value as Record;
       this.addRecord.emit(record);
+      this.onClearFields();
     }
   }
 
@@ -127,7 +131,12 @@ export class FormComponent implements ControlValueAccessor {
       return `Minimum length is ${control.errors?.['minlength'].requiredLength} characters`;
     }
     if (control?.hasError('pattern')) {
-      return 'Please enter a valid phone number (9 digits)';
+      if (controlName === 'phone') {
+        return 'Please enter a valid phone number (9 digits)';
+      }
+      if (controlName === 'email') {
+        return 'Please enter a valid email address';
+      }
     }
     return '';
   }
