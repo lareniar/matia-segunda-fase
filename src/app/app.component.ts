@@ -45,8 +45,11 @@ export class AppComponent {
 
   onSelectedCountry(country: string) {
     this.isLoadingStates = true;
-    this.states = this.countriesService.getStatesByCountryName(country);
-    this.isLoadingStates = false;
+    // should use httpinterceptor to show loading state
+    setTimeout(() => {
+      this.states = this.countriesService.getStatesByCountryName(country);
+      this.isLoadingStates = false;
+    }, 1250);
   }
 
   onAddRecord(record: Record) {
