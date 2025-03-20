@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Record } from '../../interfaces/record';
+import { Record } from '../../interfaces/form';
 
 @Component({
   selector: 'app-table',

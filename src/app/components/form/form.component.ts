@@ -8,7 +8,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Record } from '../../interfaces/record';
+import { Record } from '../../interfaces/form';
 import { InputComponent } from '../input/input.component';
 import { SelectComponent } from '../select/select.component';
 @Component({

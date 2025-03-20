@@ -6,7 +6,7 @@ import { CountriesService } from './services/countries.service';
 import { catchError, Observable, of, tap } from 'rxjs';
 
 import { TableComponent } from './components/table/table.component';
-import { Record } from './interfaces/record';
+import { Record } from './interfaces/form';
 @Component({
   selector: 'app-root',
   standalone: true,
