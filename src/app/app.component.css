@@ -1,8 +1,46 @@
+:host {
+  display: flex;
+  min-height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
 .container {
   max-width: 1200px;
-  margin: 2rem auto;
+  margin: auto;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 2rem;
+  width: 100%;
+}
+
+/* Tablet View */
+@media (max-width: 768px) {
+  :host {
+    padding: 1rem;
+  }
+
+  .container {
+    padding: 1.5rem;
+  }
+
+  .form-field {
+    flex: 1 1 calc(50% - 1rem);
+  }
+}
+
+/* Mobile View */
+@media (max-width: 480px) {
+  :host {
+    padding: 0.5rem;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+
+  form {
+    padding: 0.5rem;
+  }
 }
