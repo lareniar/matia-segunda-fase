@@ -36,7 +36,10 @@ export class FormComponent implements ControlValueAccessor {
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     surname: new FormControl('', [Validators.required]),
-    phone: new FormControl('', [Validators.pattern('^[0-9]{9}$')]),
+    phone: new FormControl('', [
+      Validators.pattern('^[0-9]{9}$'),
+      Validators.maxLength(9),
+    ]),
     email: new FormControl('', [Validators.required, Validators.email]),
     country: new FormControl('', [Validators.required]),
     state: new FormControl('', [Validators.required]),
@@ -52,12 +55,18 @@ export class FormComponent implements ControlValueAccessor {
   }
 
   onClearFields() {
-    this.isLoadingStates = true;
-    this.form.reset();
+    this.form.reset({
+      name: '',
+      surname: '',
+      phone: '',
+      email: '',
+      country: '',
+      state: '',
+    });
     Object.keys(this.form.controls).forEach((key) => {
       const control = this.form.get(key);
-      control?.setErrors(null);
       control?.markAsUntouched();
+      control?.updateValueAndValidity();
     });
   }
 
@@ -90,6 +99,15 @@ export class FormComponent implements ControlValueAccessor {
     }
   }
 
+  onBlurPhone() {
+    const phoneControl = this.form.get('phone');
+    console.log(phoneControl?.value);
+    if (phoneControl?.value && phoneControl.valid) {
+      phoneControl.setErrors(null);
+    } else {
+      phoneControl?.setErrors({ pattern: true });
+    }
+  }
   getErrorMessage(controlName: string): string {
     const control = this.form.get(controlName);
     if (control?.hasError('required')) {
