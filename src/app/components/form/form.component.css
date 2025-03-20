@@ -42,7 +42,8 @@ button {
 }
 
 #add:disabled {
-  background-color: #7c7c7c;
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 #add:not(:disabled) {
@@ -58,12 +59,11 @@ button {
 }
 
 button:disabled {
-  background: #cccccc;
-  cursor: not-allowed;
+  background: #45a049;
 }
 
 .error-message {
-  color: #dc3545;
+  color: #f44336;
   font-size: 0.875rem;
   margin-top: 0.25rem;
   font-family: "Segoe UI", system-ui, -apple-system, sans-serif;

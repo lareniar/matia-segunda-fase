@@ -33,14 +33,21 @@ export class FormComponent implements ControlValueAccessor {
   @Output() selectedCountry = new EventEmitter<string>();
   @Output() addRecord = new EventEmitter<Record>();
   previousCountry: string | null = null;
+  emailRegex = '/^[w-.]+@([w-]+.)+[w-]{2,4}$/';
+  phoneRegex = '/^[0-9]{9}$/';
+
+  // The form group validators should use a factory to generate each form control
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     surname: new FormControl('', [Validators.required]),
     phone: new FormControl('', [
-      Validators.pattern('^[0-9]{9}$'),
+      Validators.pattern(this.phoneRegex),
       Validators.maxLength(9),
     ]),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern(this.emailRegex),
+    ]),
     country: new FormControl('', [Validators.required]),
     state: new FormControl('', [Validators.required]),
   });

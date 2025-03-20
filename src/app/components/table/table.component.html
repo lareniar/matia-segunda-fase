@@ -19,11 +19,12 @@
     }
   </tbody>
 </table>
-<div class="button-container">
+
+<div class="button-container" [class.is-disabled]="records.length == 0">
   <button
     id="delete"
-    [disabled]="records.length === 0"
     (click)="onDeleteRecord()"
+    [disabled]="records.length == 0"
   >
     Delete
   </button>
