@@ -19,6 +19,12 @@
     }
   </tbody>
 </table>
-<button [disabled]="records.length === 0" (click)="deleteRecord()">
-  Delete Last Record
-</button>
+<div class="button-container">
+  <button
+    id="delete"
+    [disabled]="records.length === 0"
+    (click)="deleteRecord()"
+  >
+    Delete
+  </button>
+</div>

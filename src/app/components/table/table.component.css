@@ -8,17 +8,48 @@ table {
   margin: 20px 0;
   font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
   letter-spacing: 0.3px;
+  table-layout: fixed;
+}
+
+th:first-child,
+td:first-child {
+  width: 10%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 12%;
+}
+
+/* Third column (Phone) */
+th:nth-child(3),
+td:nth-child(3) {
+  width: 12%;
+}
+
+/* All other columns */
+th:not(:first-child):not(:nth-child(2)):not(:nth-child(3)),
+td:not(:first-child):not(:nth-child(2)):not(:nth-child(3)) {
+  width: 22%;
+}
+
+th,
+td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 th {
   background: #b0235f;
   color: white;
   font-weight: 600;
-  text-align: left;
+  text-align: left !important;
   padding: 12px 15px;
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  white-space: nowrap;
 }
 
 td {
@@ -29,18 +60,19 @@ td {
   color: #2c3e50;
 }
 
-tr:last-child td {
-  border-bottom: none;
-}
-
 tr:hover td {
   background: rgba(0, 18, 32, 0.05);
 }
 
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
 button {
-  margin: 20px 0;
   padding: 10px 20px;
-  background: #fa7268;
   color: white;
   border: none;
   border-radius: 4px;
@@ -52,8 +84,12 @@ button {
   transition: background 0.3s ease;
 }
 
-button:hover:not(:disabled) {
-  background: #d73b67;
+#delete {
+  background-color: #ff5722;
+}
+
+#delete:hover:not(:disabled) {
+  background-color: #f4511e;
 }
 
 button:disabled {
