@@ -23,17 +23,6 @@
 
   <div class="form-field">
     <app-input
-      formControlName="phone"
-      label="Phone"
-      placeholder="Enter your phone number"
-    />
-    @if (form.get('phone')?.touched && form.get('phone')?.errors) {
-    <div class="error-message">{{ getErrorMessage("phone") }}</div>
-    }
-  </div>
-
-  <div class="form-field">
-    <app-input
       formControlName="email"
       label="Email"
       placeholder="Enter your email"
@@ -41,6 +30,14 @@
     @if (form.get('email')?.touched && form.get('email')?.errors) {
     <div class="error-message">{{ getErrorMessage("email") }}</div>
     }
+  </div>
+
+  <div class="form-field">
+    <app-input
+      formControlName="phone"
+      label="Phone"
+      placeholder="Enter your phone number"
+    />
   </div>
 
   <div class="form-field">
@@ -62,15 +59,15 @@
       label="State"
       placeholder="Select a state"
       [options]="states"
+      [isLoading]="isLoadingStates"
     />
     @if (form.get('state')?.touched && form.get('state')?.errors) {
     <div class="error-message">{{ getErrorMessage("state") }}</div>
     }
   </div>
 
-  <div class="form-row">
-    <div class="form-field">
-      <button type="submit" class="add-button">Add Record</button>
-    </div>
+  <div class="buttons-container">
+    <button id="add" [disabled]="form.invalid" type="submit">Add</button>
+    <button id="clear" type="button" (click)="onClearFields()">Clear</button>
   </div>
 </form>

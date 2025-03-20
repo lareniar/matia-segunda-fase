@@ -25,6 +25,7 @@ export class FormComponent implements ControlValueAccessor {
   nameErrorMessage: string = '';
   surnameErrorMessage: string = '';
   emailErrorMessage: string = '';
+
   @Input() countries: Observable<string[]> = new Observable<string[]>();
   @Input() states: Observable<string[]> = new Observable<string[]>();
   @Input() isLoadingStates = false;
@@ -48,6 +49,16 @@ export class FormComponent implements ControlValueAccessor {
       this.selectedCountry.emit(selectedCountry);
       this.previousCountry = selectedCountry;
     }
+  }
+
+  onClearFields() {
+    this.isLoadingStates = true;
+    this.form.reset();
+    Object.keys(this.form.controls).forEach((key) => {
+      const control = this.form.get(key);
+      control?.setErrors(null);
+      control?.markAsUntouched();
+    });
   }
 
   onSubmit() {
