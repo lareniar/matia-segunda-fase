@@ -3,20 +3,14 @@ import { RouterOutlet } from '@angular/router';
 import { FormComponent } from './components/form/form.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CountriesService } from './services/countries.service';
-import { Observable } from 'rxjs';
-import { HttpClientModule } from '@angular/common/http';
+import { catchError, Observable, of, tap } from 'rxjs';
+
 import { TableComponent } from './components/table/table.component';
 import { Record } from './interfaces/record';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    FormComponent,
-    HeaderComponent,
-    HttpClientModule,
-    TableComponent,
-  ],
+  imports: [RouterOutlet, FormComponent, HeaderComponent, TableComponent],
   providers: [CountriesService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -28,7 +22,7 @@ export class AppComponent {
 
   countries = new Observable<string[]>();
   states = new Observable<string[]>();
-  isLoadingStates = false;
+  isLoadingStates = true;
   tableHeaders: string[] = [];
 
   constructor(private countriesService: CountriesService) {
@@ -45,14 +39,22 @@ export class AppComponent {
 
   onSelectedCountry(country: string) {
     this.isLoadingStates = true;
-    // should use httpinterceptor to show loading state
-    setTimeout(() => {
-      this.states = this.countriesService.getStatesByCountryName(country);
-      this.isLoadingStates = false;
-    }, 1250);
+    this.states = this.countriesService.getStatesByCountryName(country).pipe(
+      tap((states) => {
+        this.isLoadingStates = states.length == 0;
+      }),
+      catchError((error) => {
+        console.error('Error fetching states:', error);
+        return of([]);
+      })
+    );
   }
 
   onAddRecord(record: Record) {
     this.records.push(record);
+  }
+
+  onChange(event: Event) {
+    console.log('a');
   }
 }
