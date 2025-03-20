@@ -5,5 +5,4 @@ export interface Record {
   email: string;
   country: string;
   state: string;
-  [key: string]: string;
 }
