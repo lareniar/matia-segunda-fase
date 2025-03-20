@@ -90,3 +90,27 @@ button {
   pointer-events: none;
   cursor: not-allowed;
 }
+
+/* Mobile View */
+@media (max-width: 480px) {
+  th:not(:nth-child(1)):not(:nth-child(2)),
+  td:not(:nth-child(1)):not(:nth-child(2)) {
+    display: none;
+  }
+
+  th:first-child,
+  td:first-child,
+  th:nth-child(2),
+  td:nth-child(2) {
+    width: 50%;
+  }
+
+  table {
+    margin: 10px 0;
+  }
+
+  th,
+  td {
+    padding: 10px;
+  }
+}
