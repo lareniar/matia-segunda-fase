@@ -9,5 +9,9 @@
     (addRecord)="onAddRecord($event)"
   />
 
-  <app-table [records]="records" [tableHeaders]="tableHeaders" />
+  <app-table
+    [(records)]="records"
+    [tableHeaders]="tableHeaders"
+    (recordsChange)="onDeleteRecord()"
+  />
 </div>
