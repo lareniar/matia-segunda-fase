@@ -21,9 +21,7 @@ export class TableComponent implements OnChanges {
   @Output() recordsChange = new EventEmitter<Record[]>();
   @Input() tableHeaders: string[] = [];
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-  }
+  ngOnChanges(changes: SimpleChanges): void {}
 
   onDeleteRecord() {
     this.records.pop();

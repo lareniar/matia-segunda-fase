@@ -65,11 +65,6 @@ export class AppComponent {
   }
 
   onDeleteRecord() {
-    console.log(this.records);
     this.storageService.saveLocalStorageArray(this.records);
-  }
-
-  onChange(event: Event) {
-    console.log('a');
   }
 }

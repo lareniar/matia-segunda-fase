@@ -37,6 +37,7 @@
       formControlName="phone"
       label="Teléfono"
       placeholder="Introduce tu teléfono"
+      [maxlength]="9"
       (change)="onBlurPhone()"
     />
     @if (form.get('phone')?.touched && form.get('phone')?.errors) {

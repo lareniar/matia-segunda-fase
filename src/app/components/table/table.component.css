@@ -44,7 +44,7 @@ th {
   background: #b0235f;
   color: white;
   font-weight: 600;
-  text-align: left !important;
+  text-align: center !important;
   padding: 12px 15px;
   font-size: 13px;
   text-transform: uppercase;
@@ -58,6 +58,7 @@ td {
   font-size: 14px;
   line-height: 1.4;
   color: #2c3e50;
+  text-align: center;
 }
 
 tr:hover td {
@@ -89,6 +90,15 @@ button {
   opacity: 0.4;
   pointer-events: none;
   cursor: not-allowed;
+}
+
+.is-empty {
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  color: #2c3e50;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
 }
 
 /* Mobile View */

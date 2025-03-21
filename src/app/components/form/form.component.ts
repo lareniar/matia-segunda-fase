@@ -91,13 +91,13 @@ export class FormComponent implements ControlValueAccessor {
 
   onBlurPhone() {
     const phoneControl = this.form.get('phone');
-    console.log(phoneControl?.value);
     if (phoneControl?.value && phoneControl.valid) {
       phoneControl.setErrors(null);
     } else {
       phoneControl?.setErrors({ pattern: true });
     }
   }
+
   getErrorMessage(controlName: string): string {
     const control = this.form.get(controlName);
     if (control?.hasError('required')) {
