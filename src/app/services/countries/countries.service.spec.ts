@@ -24,9 +24,9 @@ describe('CountriesService', () => {
     });
   });
 
-  describe('getStatesByCountryName', () => {
+  describe('getProvinceByCountryName', () => {
     it('should return an array of states', () => {
-      service.getStatesByCountryName('Spain').subscribe((states) => {
+      service.getProvincesByCountryName('Spain').subscribe((states) => {
         expect(states).toBeDefined();
       });
     });

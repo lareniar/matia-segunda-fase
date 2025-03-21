@@ -44,7 +44,7 @@ th {
   background: #b0235f;
   color: white;
   font-weight: 600;
-  text-align: center !important;
+  text-align: left !important;
   padding: 12px 15px;
   font-size: 13px;
   text-transform: uppercase;
@@ -58,7 +58,6 @@ td {
   font-size: 14px;
   line-height: 1.4;
   color: #2c3e50;
-  text-align: center;
 }
 
 tr:hover td {

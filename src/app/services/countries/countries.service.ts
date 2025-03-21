@@ -22,11 +22,19 @@ export class CountriesService {
       );
   }
 
-  getStatesByCountryName(country: string): Observable<string[]> {
+  getProvincesByCountryName(country: string): Observable<string[]> {
     return this.http
       .post<any>(this.provincesUrl, { country })
       .pipe(
-        map((response) => response.data.states.map((state: any) => state.name))
+        map((response) =>
+          response.data.states
+            .filter((state: any) =>
+              state.name.toLowerCase().includes('province')
+            )
+            .map((state: any) =>
+              state.name.replace(/\s*province\s*/i, '').trim()
+            )
+        )
       );
   }
 }

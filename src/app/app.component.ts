@@ -32,12 +32,12 @@ export class AppComponent {
   ) {
     this.countries$ = this.countriesService.getCountries();
     this.tableHeaders = [
-      'name',
-      'surname',
-      'phone',
-      'email',
-      'country',
-      'state',
+      'Nombre',
+      'Apellidos',
+      'Teléfono',
+      'Email',
+      'País',
+      'Provincia',
     ];
   }
 
@@ -48,7 +48,7 @@ export class AppComponent {
   onSelectedCountry(country: string) {
     this.isLoadingStates = true;
     this.provinces$ = this.countriesService
-      .getStatesByCountryName(country)
+      .getProvincesByCountryName(country)
       .pipe(
         tap((provinces) => {
           this.isLoadingStates = provinces.length == 0;

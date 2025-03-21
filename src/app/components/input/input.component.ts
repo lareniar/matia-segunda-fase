@@ -3,14 +3,13 @@ import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
-  FormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-input',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
