@@ -1,16 +1,25 @@
+:host {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 header {
   width: 100%;
-  padding: 1rem;
+  max-width: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .logo {
-  height: 75px;
-  width: auto;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 a {
-  display: inline-block;
+  width: 100%;
+  display: block;
+  text-align: center;
 }
