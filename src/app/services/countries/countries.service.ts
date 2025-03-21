@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
 })
 export class CountriesService {
   private countriesUrl = `${environment.BASE_URL}/v0.1/countries/flag/unicode`;
-  private statesUrl = `${environment.BASE_URL}/v0.1/countries/states`;
+  private statesUrl = `${environment.BASE_URL}/v0.1/countries/provinces`;
 
   constructor(private http: HttpClient) {}
 
@@ -26,7 +26,9 @@ export class CountriesService {
     return this.http
       .post<any>(this.statesUrl, { country })
       .pipe(
-        map((response) => response.data.states.map((state: any) => state.name))
+        map((response) =>
+          response.data.provinces.map((state: any) => state.name)
+        )
       );
   }
 }

@@ -26,8 +26,8 @@ export class FormComponent implements ControlValueAccessor {
   surnameErrorMessage: string = '';
   emailErrorMessage: string = '';
 
-  @Input() countries: Observable<string[]> = new Observable<string[]>();
-  @Input() states: Observable<string[]> = new Observable<string[]>();
+  @Input() countries$: Observable<string[]> = new Observable<string[]>();
+  @Input() provinces$: Observable<string[]> = new Observable<string[]>();
   @Input() isLoadingStates = false;
 
   @Output() selectedCountry = new EventEmitter<string>();
@@ -89,6 +89,37 @@ export class FormComponent implements ControlValueAccessor {
     }
   }
 
+  onBlurPhone() {
+    const phoneControl = this.form.get('phone');
+    console.log(phoneControl?.value);
+    if (phoneControl?.value && phoneControl.valid) {
+      phoneControl.setErrors(null);
+    } else {
+      phoneControl?.setErrors({ pattern: true });
+    }
+  }
+  getErrorMessage(controlName: string): string {
+    const control = this.form.get(controlName);
+    if (control?.hasError('required')) {
+      return 'Este campo es requerido';
+    }
+    if (control?.hasError('email')) {
+      return 'Introduce un email válido';
+    }
+    if (control?.hasError('minlength')) {
+      return `Mínimo ${control.errors?.['minlength'].requiredLength} caracteres`;
+    }
+    if (control?.hasError('pattern')) {
+      if (controlName === 'phone') {
+        return 'Introduce un teléfono válido (9 dígitos)';
+      }
+      if (controlName === 'email') {
+        return 'Introduce un email válido';
+      }
+    }
+    return '';
+  }
+
   // CVA
   writeValue(value: any): void {
     this.onChange(value);
@@ -108,36 +139,5 @@ export class FormComponent implements ControlValueAccessor {
     } else {
       this.form.enable();
     }
-  }
-
-  onBlurPhone() {
-    const phoneControl = this.form.get('phone');
-    console.log(phoneControl?.value);
-    if (phoneControl?.value && phoneControl.valid) {
-      phoneControl.setErrors(null);
-    } else {
-      phoneControl?.setErrors({ pattern: true });
-    }
-  }
-  getErrorMessage(controlName: string): string {
-    const control = this.form.get(controlName);
-    if (control?.hasError('required')) {
-      return 'This field is required';
-    }
-    if (control?.hasError('email')) {
-      return 'Please enter a valid email address';
-    }
-    if (control?.hasError('minlength')) {
-      return `Minimum length is ${control.errors?.['minlength'].requiredLength} characters`;
-    }
-    if (control?.hasError('pattern')) {
-      if (controlName === 'phone') {
-        return 'Please enter a valid phone number (9 digits)';
-      }
-      if (controlName === 'email') {
-        return 'Please enter a valid email address';
-      }
-    }
-    return '';
   }
 }

@@ -21,8 +21,8 @@ export class AppComponent {
 
   records: Record[] = [];
 
-  countries = new Observable<string[]>();
-  states = new Observable<string[]>();
+  countries$ = new Observable<string[]>();
+  provinces$ = new Observable<string[]>();
   isLoadingStates = true;
   tableHeaders: string[] = [];
 
@@ -30,7 +30,7 @@ export class AppComponent {
     private countriesService: CountriesService,
     private storageService: RecordStorageService
   ) {
-    this.countries = this.countriesService.getCountries();
+    this.countries$ = this.countriesService.getCountries();
     this.tableHeaders = [
       'name',
       'surname',
@@ -47,14 +47,16 @@ export class AppComponent {
 
   onSelectedCountry(country: string) {
     this.isLoadingStates = true;
-    this.states = this.countriesService.getStatesByCountryName(country).pipe(
-      tap((states) => {
-        this.isLoadingStates = states.length == 0;
-      }),
-      catchError((error) => {
-        return of([]);
-      })
-    );
+    this.provinces$ = this.countriesService
+      .getStatesByCountryName(country)
+      .pipe(
+        tap((provinces) => {
+          this.isLoadingStates = provinces.length == 0;
+        }),
+        catchError((error) => {
+          return of([]);
+        })
+      );
   }
 
   onAddRecord(record: Record) {

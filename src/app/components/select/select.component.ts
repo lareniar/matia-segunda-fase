@@ -25,7 +25,7 @@ export class SelectComponent implements ControlValueAccessor {
   @Input() label: string = '';
   @Input() placeholder: string = '';
   @Input() errorMessage: string = '';
-  @Input() options: Observable<string[]> = new Observable<string[]>();
+  @Input() options$: Observable<string[]> = new Observable<string[]>();
   @Input() isLoading: boolean = false;
 
   value: string = '';

@@ -2,8 +2,8 @@
 <div class="container">
   <app-header-component />
   <app-form-component
-    [countries]="countries"
-    [states]="states"
+    [countries$]="countries$"
+    [provinces$]="provinces$"
     [isLoadingStates]="isLoadingStates"
     (selectedCountry)="onSelectedCountry($event)"
     (addRecord)="onAddRecord($event)"

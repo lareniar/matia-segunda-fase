@@ -2,8 +2,8 @@
   <div class="form-field">
     <app-input
       formControlName="name"
-      label="Name"
-      placeholder="Enter your name"
+      label="Nombre"
+      placeholder="Introduce tu nombre"
     />
     @if (form.get('name')?.touched && form.get('name')?.errors) {
     <div class="error-message">{{ getErrorMessage("name") }}</div>
@@ -13,8 +13,8 @@
   <div class="form-field">
     <app-input
       formControlName="surname"
-      label="Surname"
-      placeholder="Enter your surname"
+      label="Apellidos"
+      placeholder="Introduce tus apellidos"
     />
     @if (form.get('surname')?.touched && form.get('surname')?.errors) {
     <div class="error-message">{{ getErrorMessage("surname") }}</div>
@@ -25,7 +25,7 @@
     <app-input
       formControlName="email"
       label="Email"
-      placeholder="Enter your email"
+      placeholder="Introduce tu email"
     />
     @if (form.get('email')?.touched && form.get('email')?.errors) {
     <div class="error-message">{{ getErrorMessage("email") }}</div>
@@ -35,8 +35,8 @@
   <div class="form-field">
     <app-input
       formControlName="phone"
-      label="Phone"
-      placeholder="Enter your phone number"
+      label="Teléfono"
+      placeholder="Introduce tu teléfono"
       (change)="onBlurPhone()"
     />
     @if (form.get('phone')?.touched && form.get('phone')?.errors) {
@@ -47,9 +47,9 @@
   <div class="form-field">
     <app-select
       formControlName="country"
-      label="Country"
-      placeholder="Select a country"
-      [options]="countries"
+      label="País"
+      placeholder="Selecciona un país"
+      [options$]="countries$"
       (change)="onSelectedCountry($event)"
     />
     @if (form.get('country')?.touched && form.get('country')?.errors) {
@@ -60,9 +60,9 @@
   <div class="form-field">
     <app-select
       formControlName="state"
-      label="State"
-      placeholder="Select a state"
-      [options]="states"
+      label="Provincia"
+      placeholder="Selecciona una provincia"
+      [options$]="provinces$"
       [isLoading]="isLoadingStates"
     />
     @if (form.get('state')?.touched && form.get('state')?.errors) {
@@ -77,8 +77,10 @@
       [disabled]="form.invalid"
       (click)="onSubmit()"
     >
-      Add
+      Añadir
     </button>
-    <button id="clear" type="button" (click)="onClearFields()">Clear</button>
+    <button id="clear" type="button" (click)="onClearFields()">
+      Reiniciar
+    </button>
   </div>
 </form>
